@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title id="site-title"></title>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for awesome icons. You can redefine icons used in a plugin configuration -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Medium Editor (https://yabwe.github.io/medium-editor/) -->
+    <link rel="stylesheet" href="css/medium-editor.css">
+    <link rel="stylesheet" href="css/themes/default.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h1>CleanEdit</h1>
+        <hr/>
+        <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none;"></div>
+        <button class="btn btn-primary" type="submit" onclick="download('cleanedit.html', editor.serialize().content.value);">Save</button>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="container">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="download.js"></script>
+
+    <!-- Medium Editor Plugin -->
+    <script src="js/medium-editor.js"></script>
+    <script>
+      var editor = new MediumEditor('.editable');
+      editor.subscribe('editableInput', function (event, editable) {
+      // Do some work
+      });
+    </script>
+
+  </body>
+</html>
