@@ -16,3 +16,14 @@ function make_yaml(text) {
   var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: 2016-09-27 14:41:00 -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
   return yaml_header + html_text;
 }
+
+function read_file(event) {
+  var input = event.target;
+  var reader = new FileReader();
+  reader.onload = function(){
+    var text = reader.result;
+    document.getElementById('content').innerHTML = text;
+  };
+  reader.readAsText(input.files[0]);
+
+}

@@ -32,6 +32,9 @@
         <h1>just write...</h1>
         <!--<p style="color: #AAAAAA">A Medium-like editor for undistracted writing. Select text to reveal a pop-up menu for formatting options. And try it in your browser's full-screen mode for an even cleaner experience! Based on <a href="https://github.com/yabwe/medium-editor" target="_blank">Medium Editor</a> for JavaScript.</p>-->
         <hr/>
+        <p>Upload file: <input type="file" id="file" name="file" onchange="read_file(event);"/></p>
+        <hr/>
+        <div id="upload_content"></div>
         <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none; font-family: Merriweather; font-size: 1.4em;"></div>
         <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.html', editor.serialize().content.value);">Save as html</button>
         <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.md', make_yaml(editor.serialize().content.value));">Save as yaml</button>
@@ -58,8 +61,12 @@
     <!-- Medium Editor Plugin -->
     <script src="js/medium-editor.js"></script>
     <script>
-      var editor = new MediumEditor('.editable');
-      editor.subscribe('editableInput', function (event, editable) {
+      MedEditor = new MediumEditor('.editable', {
+        placeholder: {
+          text: ''
+        }
+      });
+      MedEditor.subscribe('editableInput', function (event, editable) {
       // Do some work
       });
     </script>
