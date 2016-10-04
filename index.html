@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
     <!-- Font Awesome for awesome icons. You can redefine icons used in a plugin configuration -->
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
@@ -35,7 +35,7 @@
         <p>Upload file: <input type="file" id="file" name="file" onchange="read_file(event);"/></p>
         <hr/>
         <div id="upload_content"></div>
-        <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none; font-family: Merriweather; font-size: 1.4em;"></div>
+        <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none; font-family: Merriweather; font-size: 16px; line-height: 1.6em;"></div>
         <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.html', editor.serialize().content.value);">Save as html</button>
         <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.md', make_yaml(editor.serialize().content.value));">Save as yaml</button>
       </div>
