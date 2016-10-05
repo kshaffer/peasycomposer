@@ -17,6 +17,7 @@ function make_yaml(text) {
   return yaml_header + html_text;
 }
 
+
 function read_file(event) {
   var input = event.target;
   var reader = new FileReader();
