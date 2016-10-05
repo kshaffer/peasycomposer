@@ -28,3 +28,22 @@ function read_file(event) {
   reader.readAsText(input.files[0]);
 
 }
+
+var back = 'off';
+
+function background_image() {
+  if (back == 'off') {
+    back = 'on';
+    document.getElementById('body-main').style.backgroundImage = 'url(street.jpg)';
+    document.getElementById('body-main').style.backgroundSize = 'cover';
+    document.getElementById('body-main').style.backgroundAttachment = 'fixed';
+    document.getElementById('body-main').style.color = '#ffffff';
+    document.getElementById('body-main').style.textShadow = '1px 1px 2px black';
+  } else {
+    back = 'off';
+    document.getElementById('body-main').style.backgroundImage = '';
+    document.getElementById('body-main').style.color = '#333';
+    document.getElementById('body-main').style.textShadow = '';
+  }
+
+}
