@@ -61,12 +61,19 @@
     <script src="js/medium-editor.js"></script>
     <script>
       MedEditor = new MediumEditor('.editable', {
-        placeholder: {
-          text: ''
+        buttonLabels: 'fontawesome',
+        placholder: false,
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: true,
+          cleanReplacements: [],
+          cleanAttrs: ['class', 'style', 'dir'],
+          cleanTags: ['meta'],
+          unwrapTags: []
         }
       });
       MedEditor.subscribe('editableInput', function (event, editable) {
-      // Do some work
+
       });
     </script>
 
