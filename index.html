@@ -40,8 +40,8 @@
         <div id="upload_content"></div>
         <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none; font-family: Merriweather; font-size: 18px; line-height: 1.6em;"></div>
         <hr/>
-        <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.html', MedEditor.serialize().content.value);">Save as html</button>
-        <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.md', make_yaml(MedEditor.serialize().content.value));">Save as yaml</button>
+        <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.html', MedEditor.serialize().content.value, 'html');">Save as html</button>
+        <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.md', make_yaml(MedEditor.serialize().content.value), 'md');">Save as yaml</button>
         <p style="margin-bottom: 30em;"> </p>
       </div>
       <div class="col-md-2"></div>

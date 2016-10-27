@@ -1,10 +1,18 @@
-function download(filename, text) {
+function download(filename, text, format) {
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace('<p>', '\n<p>').replace('</p>', '</p>\n').replace('<blockquote>', '\n<blockquote>').replace('</blockquote>', '</blockquote>\n').replace('<h2>', '\n<h2>').replace('</h2>', '</h2>\n').replace('<h3>', '\n<h3>').replace('</h3>', '</h3>\n')));
-  if (typeof(upload_file_name) != 'undefined') {
-    var download_filename = upload_file_name;
+  if (format == 'md') {
+    if (typeof(upload_file_name) != 'undefined') {
+      var download_filename = upload_file_name.split('.')[0] + '.md';
+    } else {
+      var download_filename = filename;
+    }
   } else {
-    var download_filename = filename;
+    if (typeof(upload_file_name) != 'undefined') {
+      var download_filename = upload_file_name;
+    } else {
+      var download_filename = filename;
+    }
   }
   element.setAttribute('download', download_filename);
 
