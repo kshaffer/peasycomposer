@@ -1,7 +1,12 @@
 function download(filename, text) {
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace('<p>', '\n<p>').replace('</p>', '</p>\n').replace('<blockquote>', '\n<blockquote>').replace('</blockquote>', '</blockquote>\n').replace('<h2>', '\n<h2>').replace('</h2>', '</h2>\n').replace('<h3>', '\n<h3>').replace('</h3>', '</h3>\n')));
-  element.setAttribute('download', filename);
+  if (typeof(upload_file_name) != 'undefined') {
+    var download_filename = upload_file_name;
+  } else {
+    var download_filename = filename;
+  }
+  element.setAttribute('download', download_filename);
 
   element.style.display = 'none';
   document.body.appendChild(element);
@@ -26,7 +31,8 @@ function read_file(event) {
     document.getElementById('content').innerHTML = text;
   };
   reader.readAsText(input.files[0]);
-
+  upload_file_name = input.files[0].name;
+  console.log(upload_file_name);
 }
 
 var back = 'off';
