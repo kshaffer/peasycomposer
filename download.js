@@ -12,7 +12,7 @@ function download(filename, text) {
 }
 
 function make_yaml(text) {
-  var html_text = text.replace('<p>', '\n').replace('</p>', '\n').replace('<blockquote>', '\n> ').replace('</blockquote>', '\n').replace('<h2>', '\n## ').replace('</h2>', '\n').replace('<h3>', '\n### ').replace('</h3>', '\n');
+  var html_text = text.replace('<p>', '\n').replace('</p>', '\n').replace('<blockquote>', '\n> ').replace('</blockquote>', '\n').replace('<h2>', '\n## ').replace('</h2>', '\n').replace('<h3>', '\n### ').replace('</h3>', '\n').replace('<b>', '**').replace('</b>', '**').replace('<i>', '*').replace('</i>', '*');
   var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: 2016-09-27 14:41:00 -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
   return yaml_header + html_text;
 }
