@@ -77,3 +77,11 @@ function background_image() {
   }
 
 }
+
+function wordCount() {
+  var textToCount = document.getElementById('content').innerHTML;
+  var words = textToCount.replace(/<.*?>/g, ' ').replace(/\n/g, ' ').replace(/  /g, ' ').replace(/  /g, ' ').trim();
+  var count = words.split(' ').length;
+  console.log(words);
+  document.getElementById('word-count').innerHTML = count;
+}

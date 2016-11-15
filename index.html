@@ -55,8 +55,9 @@
 
         <hr/>
         <div id="upload_content"></div>
-        <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none; font-family: Merriweather; font-size: 18px; line-height: 1.6em;"></div>
+        <div type="text" class="editable" name="content" id="content" placeholder="Type content here." style="width: 100%; min-height: 30em; outline: none; font-family: Merriweather; font-size: 18px; line-height: 1.6em;" onkeyup="wordCount();"></div>
         <hr/>
+        <p style="color: ">word count: <span id="word-count"></span></p><br/><br/>
         <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.html', MedEditor.serialize().content.value, 'html');">Save as html</button>
         <button class="btn btn-primary" type="submit" onclick="download('cleanwrite.md', make_yaml(MedEditor.serialize().content.value), 'md');">Save as yaml</button>
         <p style="margin-bottom: 30em;"> </p>
