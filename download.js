@@ -16,7 +16,7 @@
 
 function download(filename, text, format) {
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace('<p>', '\n<p>').replace('</p>', '</p>\n').replace('<blockquote>', '\n<blockquote>').replace('</blockquote>', '</blockquote>\n').replace('<h2>', '\n<h2>').replace('</h2>', '</h2>\n').replace('<h3>', '\n<h3>').replace('</h3>', '</h3>\n')));
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/<!.*?>/g,"").replace(/<hypothesis-highlight>/g, '').replace(/<\/hypothesis-highlight>/g, '').replace(/<script(.|\n)*?<\/script>/g, '').replace(/<style(.|\n)*?<\/style>/g, '').replace(/onclick=\"javascript.*?\"/g, '').replace(/<.*?div.*?>/g, '').replace(/\n/g, '').replace(/\s+/, ' ').trim()));
   if (format == 'md') {
     if (typeof(upload_file_name) != 'undefined') {
       var download_filename = upload_file_name.split('.')[0] + '.md';
