@@ -17,7 +17,6 @@
 function download(filename, text, format) {
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/onclick=\"javascript.*?\"/g, '').replace(/<div.*?>/g, '').replace(/<\/div.*?>/g, '').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').trim()));
-//  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/<!.*?>/g,"").replace(/<hypothesis-highlight>/g, '').replace(/<\/hypothesis-highlight>/g, '').replace(/<script(.|\n)*?<\/script>/g, '').replace(/<style(.|\n)*?<\/style>/g, '').replace(/onclick=\"javascript.*?\"/g, '').replace(/<.*?div.*?>/g, '').replace(/\n/g, '').replace(/\s+/, ' ').trim()));
   if (format == 'md') {
     if (typeof(upload_file_name) != 'undefined') {
       var download_filename = upload_file_name.split('.')[0] + '.md';
@@ -42,7 +41,7 @@ function download(filename, text, format) {
 }
 
 function make_yaml(text) {
-  var html_text = text.replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<blockquote>/g, '\n> ').replace(/<\/blockquote>/g, '\n').replace(/<h2>/g, '\n## ').replace(/<\/h2>/g, '\n').replace(/<h3>/g, '\n### ').replace(/<\/h3>/g, '\n').replace(/<b>/g, '**').replace(/<\/b>/g, '**').replace(/<i>/g, '*').replace(/<\/i>/g, '*');
+  var html_text = text.replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<blockquote>/g, '\n> ').replace(/<\/blockquote>/g, '\n').replace(/<h2>/g, '\n## ').replace(/<\/h2>/g, '\n').replace(/<h3>/g, '\n### ').replace(/<\/h3>/g, '\n').replace(/<(b|strong)>/g, '**').replace(/<\/(b|strong)>/g, '**').replace(/<(i|em)>/g, '*').replace(/<\/(i|em)>/g, '*');
   var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: 2016-09-27 14:41:00 -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
   return yaml_header + html_text;
 }
