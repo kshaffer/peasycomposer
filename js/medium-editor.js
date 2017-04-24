@@ -5228,7 +5228,12 @@ MediumEditor.extensions = {};
                 p;
 
             if (this.cleanPastedHTML && pastedHTML) {
-                return this.cleanPaste(pastedHTML);
+                // added .replace(/<!--.*?-->/g, '')
+                // and .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                // and .replace(/<meta\b.*?>/gi, '')
+                // and .replace(/<link\b.*?>/gi, '')
+                // and .replace(/<!.*?>/gi, '')
+                return this.cleanPaste(pastedHTML.replace(/<!--.*?-->/g, '').replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '').replace(/<meta\b.*?>/gi, '').replace(/<link.*?>/gi, '').replace(/<!.*?>/gi, ''));
             }
 
             if (!(this.getEditorOption('disableReturn') || (editable && editable.getAttribute('data-disable-return')))) {

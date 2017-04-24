@@ -16,7 +16,8 @@
 
 function download(filename, text, format) {
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/<!.*?>/g,"").replace(/<hypothesis-highlight>/g, '').replace(/<\/hypothesis-highlight>/g, '').replace(/<script(.|\n)*?<\/script>/g, '').replace(/<style(.|\n)*?<\/style>/g, '').replace(/onclick=\"javascript.*?\"/g, '').replace(/<.*?div.*?>/g, '').replace(/\n/g, '').replace(/\s+/, ' ').trim()));
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/onclick=\"javascript.*?\"/g, '').replace(/<div.*?>/g, '').replace(/<\/div.*?>/g, '').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').trim()));
+//  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/<!.*?>/g,"").replace(/<hypothesis-highlight>/g, '').replace(/<\/hypothesis-highlight>/g, '').replace(/<script(.|\n)*?<\/script>/g, '').replace(/<style(.|\n)*?<\/style>/g, '').replace(/onclick=\"javascript.*?\"/g, '').replace(/<.*?div.*?>/g, '').replace(/\n/g, '').replace(/\s+/, ' ').trim()));
   if (format == 'md') {
     if (typeof(upload_file_name) != 'undefined') {
       var download_filename = upload_file_name.split('.')[0] + '.md';
@@ -81,6 +82,6 @@ function wordCount() {
   var textToCount = document.getElementById('content').innerHTML;
   var words = textToCount.replace(/<.*?>/g, ' ').replace(/\n/g, ' ').replace(/  /g, ' ').replace(/  /g, ' ').trim();
   var count = words.split(' ').length;
-  console.log(words);
+  //console.log(words);
   document.getElementById('word-count').innerHTML = count;
 }
