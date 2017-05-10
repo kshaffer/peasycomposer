@@ -43,10 +43,10 @@ function download(filename, text, format) {
 function make_yaml(text) {
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  var time = (today.getHours()-4) + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var time = today.getHours() + ":" + ("0" + today.getMinutes()).slice(-2) + ":" + today.getSeconds();
   var dateTime = date+' '+time;
   var html_text = text.replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<blockquote>/g, '\n> ').replace(/<\/blockquote>/g, '\n').replace(/<h2>/g, '\n## ').replace(/<\/h2>/g, '\n').replace(/<h3>/g, '\n### ').replace(/<\/h3>/g, '\n').replace(/<(b|strong)>/g, '**').replace(/<\/(b|strong)>/g, '**').replace(/<(i|em)>/g, '*').replace(/<\/(i|em)>/g, '*').replace(/<\/{0,1}hypothesis-highlight>/g, '');
-  var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: ' + dateTime + '-0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
+  var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: ' + dateTime + ' -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
   return yaml_header + html_text;
 }
 
