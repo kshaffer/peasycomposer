@@ -16,7 +16,7 @@
 
 function download(filename, text, format) {
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/onclick=\"javascript.*?\"/g, '').replace(/<div.*?>/g, '').replace(/<\/div.*?>/g, '').replace(/<\/{0,1}hypothesis-highlight>/g, '').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').trim()));
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/onclick=\"javascript.*?\"/g, '').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/<\/{0,1}hypothesis-highlight>/g, '').trim()));
   if (format == 'md') {
     if (typeof(upload_file_name) != 'undefined') {
       var download_filename = upload_file_name.split('.')[0] + '.md';
@@ -41,8 +41,12 @@ function download(filename, text, format) {
 }
 
 function make_yaml(text) {
+  var today = new Date();
+  var date = today.getFullYear()+'-'+("0" + (today.getMonth()+1)).slice(-2)+'-'+("0" + (today.getDate()+1)).slice(-2);
+  var time = ("0" + (today.getHours()+1)).slice(-2) + ":" + ("0" + (today.getMinutes()+1)).slice(-2) + ":" + ("0" + (today.getSeconds()+1)).slice(-2);
+  var dateTime = date+' '+time;
   var html_text = text.replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<blockquote>/g, '\n> ').replace(/<\/blockquote>/g, '\n').replace(/<h2>/g, '\n## ').replace(/<\/h2>/g, '\n').replace(/<h3>/g, '\n### ').replace(/<\/h3>/g, '\n').replace(/<(b|strong)>/g, '**').replace(/<\/(b|strong)>/g, '**').replace(/<(i|em)>/g, '*').replace(/<\/(i|em)>/g, '*').replace(/<\/{0,1}hypothesis-highlight>/g, '');
-  var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: 2016-09-27 14:41:00 -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
+  var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: ' + dateTime + ' -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
   return yaml_header + html_text;
 }
 
@@ -79,7 +83,7 @@ function background_image() {
 
 function wordCount() {
   var textToCount = document.getElementById('content').innerHTML;
-  var words = textToCount.replace(/<.*?>/g, ' ').replace(/\n/g, ' ').replace(/  /g, ' ').replace(/  /g, ' ').trim();
+  var words = textToCount.replace(/<.*?>/g, ' ').trim();
   var count = words.split(' ').length;
   //console.log(words);
   document.getElementById('word-count').innerHTML = count;
