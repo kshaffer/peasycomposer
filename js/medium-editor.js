@@ -5228,12 +5228,8 @@ MediumEditor.extensions = {};
                 p;
 
             if (this.cleanPastedHTML && pastedHTML) {
-                // added .replace(/<!--.*?-->/g, '')
-                // and .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-                // and .replace(/<meta\b.*?>/gi, '')
-                // and .replace(/<link\b.*?>/gi, '')
-                // and .replace(/<!.*?>/gi, '')
-                return this.cleanPaste(pastedHTML.replace(/<!--.*?-->/g, '').replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '').replace(/<meta\b.*?>/gi, '').replace(/<link.*?>/gi, '').replace(/<!.*?>/gi, ''));
+                // .replace(/<!--.*?-->/g, '').replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '').replace(/<meta\b.*?>/gi, '').replace(/<link.*?>/gi, '').replace(/<!.*?>/gi, '')
+                return this.cleanPaste(pastedHTML);
             }
 
             if (!(this.getEditorOption('disableReturn') || (editable && editable.getAttribute('data-disable-return')))) {
