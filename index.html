@@ -79,6 +79,9 @@
     <script src="js/medium-editor.js"></script>
     <script>
       MedEditor = new MediumEditor('.editable', {
+        toolbar: {
+          buttons: ['bold', 'italic', 'underline', 'unorderedlist', 'anchor', 'h2', 'h3', 'quote', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', 'removeFormat']
+        },
         buttonLabels: 'fontawesome',
         placholder: false,
         paste: {
@@ -88,7 +91,7 @@
           cleanReplacements: [],
           cleanAttrs: ['class', 'style', 'dir'],
           cleanTags: ['script', 'link', 'meta', 'style'],
-          unwrapTags: ['span', 'div', 'article', 'hypothesis-highlight'] // doesn't seem to work?!?
+          unwrapTags: ['span', 'div', 'article', 'hypothesis-highlight'] 
         }
       });
       MedEditor.subscribe('editableInput', function (event, editable) {
