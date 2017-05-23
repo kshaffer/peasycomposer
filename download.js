@@ -16,7 +16,7 @@
 
 function download(filename, text, format) {
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/onclick=\"javascript.*?\"/g, '').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/<\/{0,1}hypothesis-highlight>/g, '').replace(/<\/{0,1}article.*?>/g, '\n').replace(/<\/{0,1}div.*?>/g, '\n').trim()));
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text.replace(/<p>/g, '\n<p>').replace(/<\/p>/g, '</p>\n').replace(/<blockquote>/g, '\n<blockquote>').replace(/<\/blockquote>/g, '</blockquote>\n').replace(/<h2>/g, '\n<h2>').replace(/<\/h2>/g, '</h2>\n').replace(/<h3>/g, '\n<h3>').replace(/<\/h3>/g, '</h3>\n').replace(/onclick=\"javascript.*?\"/g, '').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/\n{2,}/gi, '\n').replace(/<\/{0,1}hypothesis-highlight>/g, '').replace(/<\/{0,1}article.*?>/g, '\n').replace(/<\/{0,1}span.*?>/g, '').replace(/<\/{0,1}div.*?>/g, '\n').trim()));
   if (format == 'md') {
     if (typeof(upload_file_name) != 'undefined') {
       var download_filename = upload_file_name.split('.')[0] + '.md';
@@ -45,7 +45,7 @@ function make_yaml(text) {
   var date = today.getFullYear()+'-'+("0" + (today.getMonth()+1)).slice(-2)+'-'+("0" + (today.getDate()+1)).slice(-2);
   var time = ("0" + (today.getHours()+1)).slice(-2) + ":" + ("0" + (today.getMinutes()+1)).slice(-2) + ":" + ("0" + (today.getSeconds()+1)).slice(-2);
   var dateTime = date+' '+time;
-  var html_text = text.replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<blockquote>/g, '\n> ').replace(/<\/blockquote>/g, '\n').replace(/<h2>/g, '\n## ').replace(/<\/h2>/g, '\n').replace(/<h3>/g, '\n### ').replace(/<\/h3>/g, '\n').replace(/<(b|strong)>/g, '**').replace(/<\/(b|strong)>/g, '**').replace(/<(i|em)>/g, '*').replace(/<\/(i|em)>/g, '*').replace(/<\/{0,1}hypothesis-highlight>/g, '').replace(/<\/{0,1}article.*?>/g, '\n').replace(/<\/{0,1}div.*?>/g, '\n');
+  var html_text = text.replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<blockquote>/g, '\n> ').replace(/<\/blockquote>/g, '\n').replace(/<h2>/g, '\n## ').replace(/<\/h2>/g, '\n').replace(/<h3>/g, '\n### ').replace(/<\/h3>/g, '\n').replace(/<(b|strong)>/g, '**').replace(/<\/(b|strong)>/g, '**').replace(/<(i|em)>/g, '*').replace(/<\/(i|em)>/g, '*').replace(/<\/{0,1}hypothesis-highlight>/g, '').replace(/<\/{0,1}span.*?>/g, '').replace(/<\/{0,1}article.*?>/g, '\n').replace(/<\/{0,1}div.*?>/g, '\n');
   var yaml_header = '---\nlayout: post\ntitle: \"\"\nmodified: ' + dateTime + ' -0400\nimage:\n  feature: filename.jpg\n  teaser: filename-teaser.jpg\n  credit: photographername\n  creditlink: linktosource\nshare: true\ncategories: [category1, category2]\n---\n\n'
   return yaml_header + html_text;
 }
