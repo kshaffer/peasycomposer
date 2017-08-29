@@ -1,4 +1,4 @@
-// This file is copyright ©2016 Kris P. Shaffer.
+// This file is copyright ©2017 Kris P. Shaffer.
 // This file is part of CleanWrite.
 
 // CleanWrite is free software: you can redistribute it and/or modify
