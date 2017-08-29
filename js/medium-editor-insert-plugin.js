@@ -1,8 +1,8 @@
-/*! 
- * medium-editor-insert-plugin v2.4.1 - jQuery insert plugin for MediumEditor
+/*!
+ * medium-editor-insert-plugin v2.3.3 - jQuery insert plugin for MediumEditor
  *
  * http://linkesch.com/medium-editor-insert-plugin
- * 
+ *
  * Copyright (c) 2014 Pavel Linkesch (http://linkesch.com)
  * Released under the MIT license
  */
@@ -42,13 +42,13 @@ this["MediumInsert"]["Templates"]["src/js/templates/core-buttons.hbs"] = Handleb
 
   return "            <li><button data-addon=\""
     + container.escapeExpression(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper)))
-    + "\" data-action=\"add\" class=\"medium-insert-action\" type=\"button\">"
+    + "\" data-action=\"add\" class=\"medium-insert-action\">"
     + ((stack1 = ((helper = (helper = helpers.label || (depth0 != null ? depth0.label : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"label","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "</button></li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div class=\"medium-insert-buttons\" contenteditable=\"false\" style=\"display: none\">\n    <button class=\"medium-insert-buttons-show\" type=\"button\"><span>+</span></button>\n    <ul class=\"medium-insert-buttons-addons\" style=\"display: none\">\n"
+  return "<div class=\"medium-insert-buttons\" contenteditable=\"false\" style=\"display: none\">\n    <button class=\"medium-insert-buttons-show\"><span>+</span></button>\n    <ul class=\"medium-insert-buttons-addons\" style=\"display: none\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.addons : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </ul>\n</div>\n";
 },"useData":true});
@@ -102,7 +102,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/embeds-wrapper.hbs"] = Handl
 
   return "<div class=\"medium-insert-embeds\" contenteditable=\"false\">\n	<figure>\n		<div class=\"medium-insert-embed\">\n			"
     + ((stack1 = ((helper = (helper = helpers.html || (depth0 != null ? depth0.html : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"html","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n		</div>\n	</figure>\n	<div class=\"medium-insert-embeds-overlay\"></div>\n</div>";
+    + "\n		</div>\n	</figure>";
 },"useData":true});
 
 this["MediumInsert"]["Templates"]["src/js/templates/images-fileupload.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -308,13 +308,11 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             var $data = $('<div />').html(data[key].value);
 
             $data.find('.medium-insert-buttons').remove();
-            $data.find('.medium-insert-active').removeClass('medium-insert-active');
 
             // Restore original embed code from embed wrapper attribute value.
             $data.find('[data-embed-code]').each(function () {
-                var $this = $(this),
-                    html = $('<div />').html($this.attr('data-embed-code')).text();
-                $this.html(html);
+                var $this = $(this);
+                $this.html($this.attr('data-embed-code'));
             });
 
             data[key].value = $data.html();
@@ -581,12 +579,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             if ($p.length && (($p.text().trim() === '' && !activeAddon) || activeAddon === 'images')) {
                 $p.addClass('medium-insert-active');
 
-                if (activeAddon === 'images') {
-                    this.$el.find('.medium-insert-buttons').attr('data-active-addon', activeAddon);
-                } else {
-                    this.$el.find('.medium-insert-buttons').removeAttr('data-active-addon');
-                }
-
                 // If buttons are displayed on addon paragraph, wait 100ms for possible captions to display
                 setTimeout(function () {
                     that.positionButtons(activeAddon);
@@ -645,26 +637,29 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             $lastCaption = $p.hasClass('medium-insert-images-grid') ? [] : $p.find('figure:last figcaption'),
             elementsContainer = this.getEditor() ? this.getEditor().options.elementsContainer : $('body').get(0),
             elementsContainerAbsolute = ['absolute', 'fixed'].indexOf(window.getComputedStyle(elementsContainer).getPropertyValue('position')) > -1,
+            elementsContainerBoundary = elementsContainerAbsolute ? elementsContainer.getBoundingClientRect() : null,
             position = {};
 
         if ($p.length) {
-            position.left = $p.position().left;
-            position.top = $p.position().top;
-
             if (activeAddon) {
-                position.left += $p.width() - $buttons.find('.medium-insert-buttons-show').width() - 10;
-                position.top += $p.height() - 20 + ($lastCaption.length ? -$lastCaption.height() - parseInt($lastCaption.css('margin-top'), 10) : 10);
+                position.left = $p.position().left + $p.width() - $buttons.find('.medium-insert-buttons-show').width() - 50;
+                position.top = $p.position().top + $p.height() -10 + ($lastCaption.length ? -$lastCaption.height() - parseInt($lastCaption.css('margin-top'), 10) : 10);
             } else {
-                position.left += -parseInt($buttons.find('.medium-insert-buttons-addons').css('left'), 10) - parseInt($buttons.find('.medium-insert-buttons-addons button:first').css('margin-left'), 10);
-                position.top += parseInt($p.css('margin-top'), 10);
+                position.left = $p.position().left - parseInt($buttons.find('.medium-insert-buttons-addons').css('left'), 10) - parseInt($buttons.find('.medium-insert-buttons-addons button:first').css('margin-left'), 10) - 40;
+                position.top = $p.position().top + 10;
             }
 
             if (elementsContainerAbsolute) {
-                position.top += elementsContainer.scrollTop;
+                position.top += elementsContainer.scrollTop - elementsContainerBoundary.top;
+                position.left -= elementsContainerBoundary.left;
             }
 
             if (this.$el.hasClass('medium-editor-placeholder') === false && position.left < 0) {
-                position.left = $p.position().left;
+                position.left = $p.position().left - 40;
+
+                if (elementsContainerAbsolute) {
+                    position.left -= elementsContainerBoundary.left;
+                }
             }
 
             $buttons.css(position);
@@ -678,11 +673,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
      */
 
     Core.prototype.toggleAddons = function () {
-        if (this.$el.find('.medium-insert-buttons').attr('data-active-addon') === 'images') {
-            this.$el.find('.medium-insert-buttons').find('button[data-addon="images"]').click();
-            return;
-        }
-
         this.$el.find('.medium-insert-buttons-addons').fadeToggle();
         this.$el.find('.medium-insert-buttons-show').toggleClass('medium-insert-buttons-rotate');
     };
@@ -835,7 +825,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1',
             captions: true,
             captionPlaceholder: 'Type caption (optional)',
-            storeMeta: false,
             styles: {
                 wide: {
                     label: '<span class="fa fa-align-justify"></span>'
@@ -934,7 +923,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         this.$el
             .on('keyup click paste', $.proxy(this, 'togglePlaceholder'))
             .on('keydown', $.proxy(this, 'processLink'))
-            .on('click', '.medium-insert-embeds-overlay', $.proxy(this, 'selectEmbed'))
+            //.on('click', '.medium-insert-embeds-overlay', $.proxy(this, 'selectEmbed'))
             .on('contextmenu', '.medium-insert-embeds-placeholder', $.proxy(this, 'fixRightClickOnPlaceholder'));
 
         if (this.options.parseOnPaste) {
@@ -1156,10 +1145,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             success: function (data) {
                 var html = data && data.html;
 
-                if (that.options.storeMeta) {
-                    html += '<div class="medium-insert-embeds-meta"><script type="text/json">' + JSON.stringify(data) + '</script></div>';
-                }
-
                 if (data && !html && data.type === 'photo' && data.url) {
                     html = '<img src="' + data.url + '" alt="">';
                 }
@@ -1217,10 +1202,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             .replace(/^(https:\/\/www\.facebook\.com\/(.*))$/, '<script src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.2" async></script><div class="fb-post" data-href="$1"><div class="fb-xfbml-parse-ignore"><a href="$1">Loading Facebook post...</a></div></div>')
             .replace(/^https?:\/\/instagram\.com\/p\/(.+)\/?$/, '<span class="instagram"><iframe src="//instagram.com/p/$1/embed/" width="612" height="710" frameborder="0" scrolling="no" allowtransparency="true"></iframe></span>');
 
-        if (this.options.storeMeta) {
-            html += '<div class="medium-insert-embeds-meta"><script type="text/json">' + JSON.stringify({}) + '</script></div>';
-        }
-
         if ((/<("[^"]*"|'[^']*'|[^'">])*>/).test(html) === false) {
             $.proxy(this, 'convertBadEmbed', url)();
             return false;
@@ -1253,7 +1234,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 // Store embed code with <script> tag inside wrapper attribute value.
                 // Make nice attribute value escaping using jQuery.
                 $div = $('<div>')
-                    .attr('data-embed-code', $('<div />').text(html).html())
+                    .attr('data-embed-code', html)
                     .html(html);
                 html = $('<div>').append($div).html();
             }
@@ -1589,7 +1570,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             captionPlaceholder: 'Type caption for image (optional)',
             autoGrid: 3,
             fileUploadOptions: { // See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
-                url: null,
+                url: 'upload.php',
                 acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
             },
             fileDeleteOptions: {},
@@ -1646,7 +1627,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 acceptFileTypesError: 'This file is not in a supported format: ',
                 maxFileSizeError: 'This file is too big: '
             }
-            // uploadError: function($el, data) {}
             // uploadCompleted: function ($el, data) {}
         };
 
@@ -1753,7 +1733,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             var $data = $('<div />').html(data[key].value);
 
             $data.find('.medium-insert-images').find('figcaption, figure').removeAttr('contenteditable');
-            $data.find('.medium-insert-images-progress').remove();
 
             data[key].value = $data.html();
         });
@@ -1823,14 +1802,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             uploadErrors.push(this.options.messages.maxFileSizeError + file.name);
         }
         if (uploadErrors.length > 0) {
-            if (this.options.uploadFailed && typeof this.options.uploadFailed === "function") {
-                this.options.uploadFailed(uploadErrors, data);
-
-                return;
-            }
-
             alert(uploadErrors.join("\n"));
-
             return;
         }
 
