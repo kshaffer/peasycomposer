@@ -106,8 +106,8 @@
                 images: { // (object) Image addon configuration
                     label: '<span class="fa fa-camera"></span>', // (string) A label for an image addon
                     uploadScript: null, // DEPRECATED: Use fileUploadOptions instead
-                    deleteScript: 'delete.php', // (string) A relative path to a delete script
-                    deleteMethod: 'POST',
+                    deleteScript: null, // (string) A relative path to a delete script
+                    deleteMethod: null,
                     fileDeleteOptions: {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
                     preview: true, // (boolean) Show an image before it is uploaded (only in browsers that support this feature)
                     captions: true, // (boolean) Enable captions
@@ -115,7 +115,7 @@
                     autoGrid: 3, // (integer) Min number of images that automatically form a grid
                     formData: {}, // DEPRECATED: Use fileUploadOptions instead
                     fileUploadOptions: { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
-                        url: 'js/jquery.fileupload.js', // (string) A relative path to an upload script
+                        url: null, // (string) A relative path to an upload script
                         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i // (regexp) Regexp of accepted file types
                     },
                     styles: { // (object) Available image styles configuration
